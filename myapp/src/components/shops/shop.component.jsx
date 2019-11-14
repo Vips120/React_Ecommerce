@@ -1,43 +1,35 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import {Spinner } from "react-bootstrap";
 import { connect } from "react-redux";
-import ShopData from "../../redux/action/shop/shop.action";
-class Shop extends Component {
+import { ShopData } from "../../redux/action/shop/shop.action";
+import { LoggedInUser } from "../../redux/action/user/user.action";
+import Shopproduct from '../../pages/shop/shop';
+class Shop extends Component {;
+  imgUrl = "https://picsum.photos/id/884/200/200";
   componentDidMount() {
     this.props.ShopData();
+    this.props.LoggedInUser();
   }
   render() {
-    if(!this.props.items) {return null}
-    return (
-      <Container>
-        <Row>
-           {
-            this.props.items.map(data => (
-              <Col md={4} key={data._id}>
-              <Card style={{ width: "18rem" }}>
-                <Card.Img variant="top" src="holder.js/100px180" />
-                <Card.Body>
-                    <Card.Title>{data.FirstName}</Card.Title>
-                  <Card.Text>
-                     {data.LastName}
-                  </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
-                </Card.Body>
-              </Card>
-            </Col>
-            )) 
-          }
-       
-        </Row>
-      </Container>
-    );
+    if(this.props.items === null) {return null}
+    if (this.props.loader.loading) { return <Spinner animation="border" />}
+    if (this.props.items) {
+      return (
+        <React.Fragment>
+          <Shopproduct imgUrl={this.imgUrl} product={this.props.items.data}/>
+        </React.Fragment>
+      );      
+    } 
   }
 }
 const mapStateToProps = state => {
-  console.log(state.shopper);
-  return { items: state.shopper };
+  console.log(state);
+  return {
+    items: state.shopper,
+    loader: state.shopper
+  };
 };
 export default connect(
   mapStateToProps,
-  { ShopData }
+  { ShopData,LoggedInUser }
 )(Shop);
