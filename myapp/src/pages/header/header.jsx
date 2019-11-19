@@ -1,7 +1,7 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, NavDropdown,Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
-const Header = ({currentuser}) => {
+const Header = ({currentuser,count}) => {
   // console.log('hello',props.currentuser);
   return (
     <Navbar bg="dark" expand="lg" fixed="top">
@@ -14,6 +14,9 @@ const Header = ({currentuser}) => {
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/shop" styles={{ color: "white" }}>
             Home
+          </Nav.Link>
+          <Nav.Link as={Link} to="/cart" styles={{ color: "white" }} className="navbar-text">
+            Cart  <Badge pill variant="primary">{count.length > 0 ? count.length : null}</Badge>
           </Nav.Link>
 
         </Nav>

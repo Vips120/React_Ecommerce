@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect} from 'react-router-dom';
 import "./product.component.css";
 import { Container, Row, Col, Card, Button,Spinner } from 'react-bootstrap';
-import {ShopProductId } from '../../redux/action/shop/shop.action';
+import {ShopProductId,cartItem } from '../../redux/action/shop/shop.action';
 class Product extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +11,10 @@ class Product extends Component {
   componentDidMount() {
     // let id = this.props.match.parmas.id;
      this.props.ShopProductId(this.id);
+  };
+
+  Addcart = (id) => {
+    this.props.cartItem(id);
   }
     render() {
       if (!this.props.item) { return null; }
@@ -29,8 +32,8 @@ class Product extends Component {
     </Card.Text>
                                 
                     <Button variant="primary"
-                      onClick={() => this.props.history.push("/Shop")}
-                    >Go Back</Button>
+                      onClick={() => this.Addcart(this.props.item.data.data._id)}
+                    >Add To Cart</Button>
   </Card.Body>
 </Card>
 
@@ -48,4 +51,4 @@ const mapStateToProps = state => {
     loading: state.shopId
   }
 }
-export default connect(mapStateToProps,{ShopProductId})(Product);
+export default connect(mapStateToProps,{ShopProductId,cartItem})(Product);

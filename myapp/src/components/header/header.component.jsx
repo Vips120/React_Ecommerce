@@ -9,13 +9,14 @@ class Headercomponent extends Component {
   render() {
     return (
       <React.Fragment>
-        <Header currentuser={this.props.data.currentUserData} />
+        <Header currentuser={this.props.data.currentUserData} count={this.props.cartitemcount}/>
       </React.Fragment>
     );
   }
 };
 const mapStateToProps = (state) => {
-  return { data: state.login }
+  console.log(state.cart.items.length);
+  return { data: state.login , cartitemcount:state.cart.items}
 
 };
 export default connect(mapStateToProps,{LoggedInUser})(Headercomponent);

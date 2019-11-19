@@ -7,6 +7,7 @@ import {Router,Switch,Route } from 'react-router-dom';
 import Logincomponent from './components/login/login.component';
 import { history } from './redux/helpers/history';
 import Privateroute from '../src/redux/helpers/privateroute';
+import Cart from './components/cart/cart';
 class App extends Component {
   render() {
     return (
@@ -19,7 +20,8 @@ class App extends Component {
             {/* <Route path="/" exact component={Logincomponent} /> */}
             <Privateroute exact path="/shop" component={Shop}/>
               <Route path="/Login" component={Logincomponent} />
-               <Route path="/product/:id" exact component={Product}/>
+              <Route path="/product/:id" exact component={Product} />
+              <Route path="/cart" component={Cart}/>
             </Switch>
           </Container>
           </Router>
