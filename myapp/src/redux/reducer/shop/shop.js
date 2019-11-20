@@ -1,5 +1,5 @@
-import { SHOP_PRODUCT, PRODUCT_ID,SHOP_LOADING,ADD_CART,REMOVE_CART } from '../../action/shop/shop.type';
-import { Cartutilty,RemoveCartutility} from "./cart.utill";
+import { SHOP_PRODUCT, PRODUCT_ID,SHOP_LOADING,ADD_CART,REMOVE_CART,ADD_QUANTITY, REMOVE_QUANTITY } from '../../action/shop/shop.type';
+import { Cartutilty,RemoveCartutility,AddQuantity} from "./cart.utill";
 export const Shopdata = (state = null,action) => {
     switch (action.type) {
         case SHOP_LOADING:
@@ -33,7 +33,11 @@ export const Addcart = (state = INITIAL_STATE, action) => {
         case ADD_CART:
             return { ...state, items: Cartutilty(state.items, action.payload), loading: false }
             case REMOVE_CART:
-                return { ...state, items: state.items.filter(data => data.data._id !== action.payload._id), loading:false }
+            return { ...state, items: state.items.filter(data => data.data._id !== action.payload._id), loading: false }
+        case ADD_QUANTITY:
+            return { ...state, items: AddQuantity(state.items, action.payload), loading: false }
+        case REMOVE_QUANTITY:
+            return {...state, items: RemoveQuantity(state.items, action.payload), loading:false}
         default:
             return state;
     }

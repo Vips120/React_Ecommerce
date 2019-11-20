@@ -19,5 +19,15 @@ export const RemoveCartutility = (oldstate, removestate) => {
     if (existingcartitems) {
         return oldstate.filter(data => data.data._id !== removestate._id);
     }
-    return oldstate.map(carItem => (carItem.data._id === removestate._id ? {...carItem, quantity: cartItem.quantity -1}: cartItem ))
-}
+    return oldstate.map(carItem => (carItem.data._id === removestate._id ? { ...carItem, quantity: cartItem.quantity - 1 } : cartItem))
+};
+
+export const AddQuantity = (oldstate, updatestate) => {
+    const existingcartitems = oldstate.find(item => item.data._id === updatestate.data._id);
+    existingcartitems.quantity += 1;
+    return [...oldstate, { ...updatestate, quantiyty: existingcartitems.quantity }]
+};
+
+export const RemoveQuantity = (oldstate, removestate) => {
+       const 
+};
