@@ -1,4 +1,4 @@
-import { SHOP_PRODUCT, SHOP_LOADING, PRODUCT_ID, ADD_CART, REMOVE_CART } from './shop.type';
+import { SHOP_PRODUCT, SHOP_LOADING, PRODUCT_ID, ADD_CART, REMOVE_CART,ADD_QUANTITY, REMOVE_QUANTITY } from './shop.type';
 import getShopData, { UserDataById } from '../../API/shop';
 import { history } from '../../helpers/history';
 export const ShopData = () => {
@@ -56,4 +56,33 @@ export const removecartItem = (id) => {
           }
        
      };
+};
+
+
+
+export const addQuantity = (id) => {
+     return async (dispatch) => {
+          try {
+               dispatch({ type: SHOP_LOADING });
+               setTimeout(() => {
+                    dispatch({ type: ADD_QUANTITY, payload: id });
+               }, 1000);
+          }
+          catch (ex) {
+               console.log(ex.message);
+          }
+     }
+};
+export const removeQuantity = (id) => {
+     return async (dispatch) => {
+          try {
+               dispatch({ type: SHOP_LOADING });
+               setTimeout(() => {
+                    dispatch({ type: REMOVE_QUANTITY, payload: id });
+               }, 1000);
+          }
+          catch (ex) {
+               console.log(ex.message);
+          }
+     }
 };

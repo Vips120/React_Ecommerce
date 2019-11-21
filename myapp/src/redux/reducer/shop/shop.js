@@ -1,5 +1,5 @@
 import { SHOP_PRODUCT, PRODUCT_ID,SHOP_LOADING,ADD_CART,REMOVE_CART,ADD_QUANTITY, REMOVE_QUANTITY } from '../../action/shop/shop.type';
-import { Cartutilty,RemoveCartutility,AddQuantity} from "./cart.utill";
+import { Cartutilty,RemoveCartutility,AddQuantity,RemoveQuantity} from "./cart.utill";
 export const Shopdata = (state = null,action) => {
     switch (action.type) {
         case SHOP_LOADING:
